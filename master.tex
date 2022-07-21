@@ -1,0 +1,137 @@
+\documentclass[twoside,12pt,floatfix,openright,fleqn,final]{shiraz_thesis}%,draft %xepersian-thesis-shiraz
+
+ %\usepackage[breaklinks,hyperindex,%=truelinktocpage,pdftex,backref,
+% %hyperfootnotes=false,
+% %colorlinks=true,
+% plainpages=true,
+% pdfstartview=FitH,
+% %linkcolor=lnkblue,
+% %urlcolor=lnkblue,
+% %citecolor=lnkblue,
+% pdftitle={A. R. Hashemi Master Degree Thesis},
+% pdfauthor={A. R. Hashemi <arezahashemi@gmail.com>},
+% pdfsubject={Random Scattering},
+% pdfkeywords={Light, Random Scattering, Photonic Crystal, Wave-Guide, Cavity, Randomness, Disorder, FDTD, Random Laser},
+% pdfcreator = {xeLaTeX\ with\ package\ xePersian}
+% ]{hyperref}%
+
+ %\usepackage[dvipdfmx,debug=true,breaklinks,raiselinks,hyperfootnotes,bookmarks]{hyperref}%dvipdfm,xetex,hypertex,colorlinks=true
+%\usepackage{pictex}
+
+
+
+
+ %\usepackage{bidi}
+%\usepackage{hyperref}
+
+
+
+ \begin{document}
+
+
+\title{بررسی و شبیه‌سازی برهم‌کنش پلاسمون-پلاریتون‌های سطحی و تابش فلورسانس }
+\author{علی‌رضا هاشمی}
+\subject{رساله}
+\type{دکتری}
+\degree{فیزیك}
+\field{اتمی و مولکولی}
+\supervisor{دکتر محمود حسینی‌فرزاد}
+\advisorfirst{دکتر حمید نادگران}
+\advisorsecond{دکتر عبدالناصر ذاکری}
+\advisorthird{دکتر عباس قاسم‌پور اردکانی}
+\externalreferee{دکتر میرفائز میری}
+\internalreferee{دکتر محسن قاسمی‌نژاد}
+\department{بخش فیزیک}
+\faculty{دانشکده علوم}
+\university{دانشگاه شیراز}
+\city{شیراز}
+\thesisdate{بهمن 1398}
+\score{عالی}
+\studentno{909763}
+
+\makeonvan
+
+% \begin{titlepage}
+%\thispagestyle{empty}
+%\end{titlepage}
+
+
+\BISMILLAH
+\ezharname
+\signpage
+
+ \begin{acknowledgementpage}
+%\vskip 3cm
+\centerline{\bfseries{سپاسگزاری}\normalfont}
+\vskip 28pt
+%لازم است که از تمام بزرگوارانی که در مراحل مختلف این تحقیق از راهنماییشان بهره مند شدم قدردانی نمایم؛ مخصوصاً از زحمات دکتر حسینی‌فرزاد و همچنین دکتر منتخب که با صرف وقت و توجّه ایشان این پایان نامه به سرانجام رسید، و نیز از پشتیبانی های بی دریغ خانواد\heye عزیزم کمال تشکّر را داشته باشم.\\
+از تمام بزرگوارانی که در مراحل مختلف این تحقیق از راهنمایی و کمک‌شان بهره‌مند شدم قدردانی می‌نمایم.
+
+متن این پایان نامه در محیط \LaTeX توسط بست\heye ارزشمند \XePersian ~نگاشته شده است.
+\end{acknowledgementpage}
+
+\pagenumbering{alph}
+\pagestyle{plain}
+
+ %\begin{abstractpage}
+\abstractpage{
+ در تحقیق حاضر، برای بررسی دقیق برهم‌کنش تابشگرها با پلاسمون-پولاریتون‌های سطحی، یک روش شبیه‌سازی عددی معرفی و اعتبار سنجی می‌شود. این روش بر پایه اصول فیزیکی، ماهیت احتمالی گذارهای مولکول‌ها را در الکترودینامیک محاسباتی کلاسیکی وارد می‌کند و هدف اصلی آن، شبیه‌سازی و ثبت رفتار مجموعه‌ای از تابشگرها و در یافت خواص آماری حاصل از آن، مانند همدوسی، است. قابلیّت این روش در منظور کردن توابع احتمال گذار سازگار با مکانیک کوانتمی، تبادل انرژی مولکول با محیط از طریق جذب و تابش امواج الکترومغناطیس با فرکانس‌های مجزّا و جفت شدن با معادلات ماکسول برای انتشار امواج در محیط می‌باشد. با استفاده از بسته شبیه‌سازی که با زبان \lr{C++} بر مبنای روش \lr{FDTD} تولید کرده‌ایم، توان‌مندی این روش با شبیه‌سازیِ دو مسأله مهم یعنی جهت‌مندی و همدوسی تابش خودبه‌خودی در سیستم‌های بس-تابشگر، و مقایسه نتائج با نتائج گزارش‌شده آزمایشگاهی، آزموده می‌شود. تطابق بسیار خوب این نتائج تأییدی بر صحت عمل‌کرد روش پیش‌نهادی می‌باشد. به‌علاوه، به عنوان نمونه‌ای برای قابلیّت تعمیم‌پذیری روش، تابش القایی در یک ساختار \lr{SPASER} نیز شبیه‌سازی می‌گردد. بخش دیگری از این تحقیق به بررسی مکانیزم ایجاد همدوسی زمانی و فضایی برای تابش خودبه‌خودی فلورسانس اختصاص دارد. در این راستا، یک ساختار دوگانه فوتونی-پلاسمونی معرفی و توان آن در ایجاد همدوسی بررسی می‌شود. مدهای هیبریدی ساختار به کمک مدهای نشتی، این قدرت را به ساختار می‌دهند که همدوسی زمانی تابش فلورسانس را حدود 9 برابر ارتقاء دهد و پهنای طیف تابشی را به مقداری در حدود $4\text{\lr{~nm}}$ کاهش دهد. همچنین همدوسی فضایی فراتر از $10\mu\text{\lr{m}}$ برای تابش خروجی حاصل نماید. در انتها‌، مکانیزم ایجاد این همدوسی‌ها از نظر فیزیکی تحلیل می‌شود و نقش انواع مدهای ساختار برای دست‌یابی به این هدف بررسی می‌گردد.
+\keywords{برهم‌کنش نور و ماده، تابش خودبه‌خودی، سیستم بس-تابشگر، روش عددی، شبیه‌سازی، همدوسی، ساختار دوگانه فوتونی-پلاسمونی}
+}
+%\end{abstractpage}
+
+\tableofcontents
+\newpage
+\listoffigures
+%\listoftables
+\newpage
+\pagenumbering{arabic}
+\pagestyle{fancy}
+\include{chapter1}
+\include{chapter2}
+%\include{chapter3}
+%\include{chapter4}
+%\include{chapter5}
+%\appendix
+%\include{append}
+
+
+\newpage
+\pagestyle{plain}
+ \bibliographystyle{ieeetr-fa}
+%\addcontentsline{toc}{chapter}{\numberline{ }\bibname}%
+\bibliography{biblio}
+
+
+%\begin{thebibliography}{99}
+%\end{thebibliography}
+%\printindex
+\begin{latin}
+\latintitle{Investigation and Simulation of Surface Plasmon Polaritons Interaction with Fluorescence Emission}
+\latinauthor{Ali~Reza Hashemi}
+\latintype{MASTER OF SCIENCE (MSc.)}
+\latinsubject{Thesis}
+\latinshorttype{M.S.}
+\latindegree{Physics}
+\latinfield{Optics and Laser}
+\latinfaculty{Faculty of Science}
+\latinthesisdate{September 2009}
+\latinsupervisorshort{M. Hosseini~Farzad}
+\latinsupervisor{Dr. Mahmood Hosseini~Farzad}
+\latinadvisorfirst{A. Zakeri}
+\latinadvisorsecond{H. Nadgaran}
+\latinadvisorthird{A. Montakhab}
+\latinadvisorfourth{S. Davatolhagh}
+\latindepartment{Physics}
+\latinuniversity{Shiraz University}
+\latincity{Shiraz}
+\latinscore{Excellent}
+\linespread{1.2}
+%\begin{latinabstract}
+%%\noindent In this thesis we study the effect of positional randomness on transmissional properties of a two dimensional photonic crystal as a function of a randomness parameter $\alpha$ ($\alpha=$ 0 completely ordered, $\alpha=$ 1 completely disordered). We use finite-difference time-domain~(FDTD) method to solve the Maxwell's equations in such a medium numerically. We consider two situations: first a 90$^\circ$ bent photonic crystal wave-guide and second a centrally pulsed photonic crystal micro-cavity. We plot various figures for each case which characterize the effect of randomness quantitatively. More specifically, in the wave-guide situation, we show that the general shape of the normalized total output energy is a Gaussian function of randomness with wavelength-dependent width. For centrally pulsed photonic crystal, the output energy curves display extremum behavior both as a function of time as well as randomness. We explain these effects in terms of two distinct but simultaneous effects which emerge with increasing randomness, namely the creation of semi-localized modes and the shrinking (and eventual destruction) of the photonic band-gaps. Finally, we attribute these effects to the overlap probability of random dielectric cylinders within the photonic crystal as randomness is increased.
+%%\latinkeywords{Light, Random Scattering, Photonic Crystal, Wave-Guide, Cavity, Randomness, Disorder, FDTD, Random Laser.}
+%\end{latinabstract}
+%\latinsignpage
+%\makelatintitle
+\end{latin}
+\end{document}
