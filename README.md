@@ -1,4 +1,4 @@
-# ShirazUniversity_thesis_template
+# Shiraz University Thesis Template
  A LaTex template for Shiraz University PhD/Ms thesis, based on XePersian.
  
  Requirements:
